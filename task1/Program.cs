@@ -19,15 +19,18 @@ namespace task1
                 string memSize = ToPrettySize(p.PrivateMemorySize);
                 Console.WriteLine("{0, -38} {1, -6} {2, -18} {3, -10} {4, -12}",p.ProcessName, p.Id, p.MachineName, p.SessionId, memSize);
                 pageCounter++;
-                if(pageCounter > 25)
+                /*if(pageCounter > 25)
                 {
                     Console.WriteLine("Press Enter to print other page");
-                    Console.Read();                    
+                    Console.Read();
+                    ClearCurrentConsoleLine();
+                    ClearCurrentConsoleLine();
                     pageCounter = 0;
-                }
+                }*/
             }
+            Console.WriteLine("=========================================================================================");
 
-            Console.Write("Enter process to stop (ID or name)");
+            Console.Write("Enter process to stop (ID or name): ");
             string processName = Console.ReadLine();
 
             
@@ -65,6 +68,15 @@ namespace task1
                 : asKb > 1 ? string.Format("{0}Kb", asKb)
                 : string.Format("{0}B", Math.Round((double)value, decimalPlaces));
             return chosenValue;
-        }        
+        }
+
+        public static void ClearCurrentConsoleLine()
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop);
+            for (int i = 0; i < Console.WindowWidth; i++)
+                Console.Write(" ");
+            Console.SetCursorPosition(0, currentLineCursor);
+        }
     }
 }
